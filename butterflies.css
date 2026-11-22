@@ -1,0 +1,108 @@
+/* Original logo, hover flight, and replayable melody interaction. */
+.hero-art { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1; isolation: isolate; margin-bottom: 100px; justify-self: end; }
+.sun-disc {
+  position: absolute;
+  inset: 1.5%;
+  border-radius: 50%;
+  background: var(--pale-yellow);
+  opacity: .58;
+  z-index: -2;
+}
+.orbit { position: absolute; border: 1px solid #b48a3b40; border-radius: 50%; z-index: -1; }
+.orbit-one { inset: 6%; border-right-color: transparent; border-bottom-color: transparent; }
+.orbit-two { inset: -2%; border-color: transparent #b48a3b40 #b48a3b40 transparent; }
+.logo-button {
+  display: block;
+  position: absolute;
+  inset: 13%;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+}
+.logo-button:disabled { cursor: default; }
+.logo-button:focus-visible { outline: 3px solid var(--ink); outline-offset: 9px; }
+.logo-picture { display: block; width: 100%; pointer-events: none; user-select: none; }
+.foundation-logo { display: block; width: 100%; height: auto; filter: drop-shadow(0 15px 20px #65431d19); }
+.floating-butterfly { position: absolute; color: var(--orange); }
+.butterfly-one { width: 17%; height: 17%; top: 1%; right: 0; transform: rotate(23deg); }
+.butterfly-two { width: 12%; height: 12%; bottom: 6%; left: -1%; transform: rotate(-28deg); }
+.flight-path { position: absolute; inset: -2%; width: 104%; height: 104%; fill: none; stroke: #c16b3b70; stroke-width: 1.2; stroke-dasharray: 4 7; stroke-linecap: round; }
+.spark { position: absolute; color: var(--orange); }
+.spark-one { top: 15%; left: 9%; font-size: 1.375rem; }
+.spark-two { bottom: 12%; right: 8%; font-size: 1.75rem; }
+.sun-disc, .orbit, .flight-path, .floating-butterfly, .spark { pointer-events: none; }
+.butterfly-orbit-layer, .celebration-layer { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.butterfly-orbit-layer { opacity: 0; transition: opacity .24s ease; }
+.hero-art.is-fluttering .butterfly-orbit-layer { opacity: 1; }
+.orbiting-butterfly, .celebration-butterfly {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(25px, 4vw, 47px);
+  aspect-ratio: 100 / 90;
+  margin-left: calc(clamp(25px, 4vw, 47px) / -2);
+  margin-top: calc(clamp(25px, 4vw, 47px) * -.45);
+  will-change: transform;
+}
+.flutter-butterfly { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 3px #7040211a); }
+.flutter-wing { transform-box: view-box; transform-origin: 50px 45px; animation: wing-beat .26s ease-in-out infinite alternate; animation-play-state: paused; }
+.is-fluttering .flutter-wing, .celebration-butterfly .flutter-wing { animation-play-state: running; }
+.flutter-wing-right { animation-delay: -.02s; }
+.celebration-sparkle { position: absolute; left: 50%; top: 50%; color: var(--orange); width: 24px; height: 24px; margin: -12px; font-size: 22px; line-height: 24px; text-align: center; }
+.celebration-ripple { position: absolute; inset: 12%; border: 2px solid var(--orange); border-radius: 50%; opacity: 0; }
+.logo-interaction { position: absolute; top: calc(100% + 16px); left: -2%; right: -2%; min-height: 30px; text-align: center; z-index: 4; }
+.logo-hint { margin: 0; color: var(--body-ink); font-size: .875rem; line-height: 1.6; }
+.touch-hint { display: none; }
+.sound-stop {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 7px 15px;
+  min-height: 44px;
+  border: 1px solid #9b5f3a55;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: .875rem;
+  cursor: pointer;
+}
+.sound-stop:hover { background: var(--pale-yellow); }
+.sound-stop:focus-visible, .audio-help a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.sound-stop svg { width: 17px; height: 17px; }
+[hidden] { display: none !important; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.audio-help { margin: 8px 0 0; font-size: .875rem; color: var(--body-ink); }
+.audio-help a { color: var(--ink); text-underline-offset: 3px; }
+.no-script-melody { text-align: center; font-size: .875rem; }
+.no-script-melody audio { display: block; max-width: 100%; margin: 10px auto; }
+@keyframes wing-beat { from { transform: scaleX(1); } to { transform: scaleX(.3); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy { animation: arrive .8s ease-out both; }
+  .hero-art { animation: arrive 1s .1s ease-out both; }
+  .is-fluttering .butterfly-one { animation: flutter 3.6s ease-in-out infinite; }
+  .is-fluttering .butterfly-two { animation: flutter-small 3.2s ease-in-out infinite; }
+  .foundation-logo { transition: filter .25s ease; }
+  .logo-button:hover .foundation-logo { filter: drop-shadow(0 15px 22px #9b5f3a30); }
+  @keyframes arrive { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes flutter { 0%, 100% { transform: translateY(0) rotate(23deg); } 50% { transform: translateY(-10px) rotate(15deg); } }
+  @keyframes flutter-small { 0%, 100% { transform: translateY(0) rotate(-28deg); } 50% { transform: translateY(-8px) rotate(-18deg); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .butterfly-orbit-layer { display: none; }
+  .flutter-wing { animation: none; }
+}
+
+@media (hover: none) {
+  .hover-hint { display: none; }
+  .touch-hint { display: inline; }
+}
+
