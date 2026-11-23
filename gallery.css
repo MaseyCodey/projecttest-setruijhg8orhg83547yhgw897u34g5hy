@@ -13,8 +13,8 @@ html { scrollbar-gutter:stable; }
 .memory-photo-featured { grid-column:2; grid-row:1 / 4; border-width:10px; box-shadow:0 9px 27px #49301e20; z-index:1; }
 .memory-photo-featured img { object-position:56% 40%; }
 .memory-photo-snow { grid-column:1; grid-row:1; --photo-angle:-1.7deg; --photo-position:51% 24%; }
-.memory-photo-present { grid-column:1; grid-row:2; --photo-angle:1.3deg; --photo-position:49% 24%; }
-.memory-photo-glasses { grid-column:1; grid-row:3; --photo-angle:-1.4deg; --photo-position:53% 38%; }
+.memory-photo-sisters { grid-column:1; grid-row:2; --photo-angle:1.3deg; --photo-position:50% 34%; }
+.memory-photo-portrait { grid-column:1; grid-row:3; --photo-angle:-1.4deg; --photo-position:50% 32%; }
 .memory-photo-shared { grid-column:3; grid-row:1; --photo-angle:1.7deg; --photo-position:56% 43%; }
 .memory-photo-butterflies { grid-column:3; grid-row:2; --photo-angle:-1.2deg; --photo-position:54% 50%; }
 .memory-photo-rainbow { grid-column:3; grid-row:3; --photo-angle:1.4deg; --photo-position:50% 32%; }
@@ -74,9 +74,9 @@ html { scrollbar-gutter:stable; }
   .memory-photo-featured { grid-column:1 / -1; grid-row:2; width:min(100%,420px); justify-self:center; aspect-ratio:17 / 22; border-width:8px; }
   .memory-photo-snow { grid-column:1; grid-row:1; }
   .memory-photo-shared { grid-column:2; grid-row:1; }
-  .memory-photo-present { grid-column:1; grid-row:3; }
+  .memory-photo-sisters { grid-column:1; grid-row:3; }
   .memory-photo-butterflies { grid-column:2; grid-row:3; }
-  .memory-photo-glasses { grid-column:1; grid-row:4; }
+  .memory-photo-portrait { grid-column:1; grid-row:4; }
   .memory-photo-rainbow { grid-column:2; grid-row:4; }
   .lola-story-copy { grid-template-columns:1fr; gap:14px; margin-top:46px; padding-top:36px; }
   .lola-story-copy h3 { margin-bottom:10px; }
@@ -91,7 +91,7 @@ html { scrollbar-gutter:stable; }
   .memory-photo-featured { aspect-ratio:17 / 22; border-width:7px; }
   .memory-photo-snow { --photo-position:51% 30%; }
   .memory-photo-shared { --photo-position:56% 45%; }
-  .memory-photo-present { --photo-position:49% 24%; }
+  .memory-photo-sisters { --photo-position:50% 34%; }
   .collage-note { font-size:.8125rem; margin-top:19px; }
   .lola-story-copy { margin-top:36px; }
   .story-sources { font-size:.8125rem; }

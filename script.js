@@ -52,7 +52,7 @@
   const checkout = document.querySelector('#donation-checkout');
   const selectionStatus = document.querySelector('#donation-selection-status');
 
-  if (oneTimeUrl || monthlyLinks.length) {
+  if (donationPanel && (oneTimeUrl || monthlyLinks.length)) {
     unavailable.hidden = true;
     donationPanel.hidden = false;
     frequencyChoices.hidden = !(oneTimeUrl && monthlyLinks.length);
@@ -102,8 +102,8 @@
   }
 
   const email = typeof config.contactEmail === 'string' ? config.contactEmail.trim() : '';
-  if (/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) && !/[?&#]/.test(email)) {
-    const link = document.querySelector('#contact-email');
+  const link = document.querySelector('#contact-email');
+  if (link && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) && !/[?&#]/.test(email)) {
     link.href = `mailto:${email}`;
     link.querySelector('span').textContent = email;
     link.hidden = false;

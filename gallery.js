@@ -1,15 +1,17 @@
-/* An accessible viewer for the original family photographs. No external services. */
+/* Accessible, grouped photo viewing. No external services. */
 (() => {
   'use strict';
-  const photos = Array.from(document.querySelectorAll('[data-gallery-photo]'));
+  const links = Array.from(document.querySelectorAll('[data-gallery-photo]'));
   const dialog = document.querySelector('#lola-gallery-dialog');
-  if (!photos.length || !dialog || typeof dialog.showModal !== 'function') return;
+  if (!links.length || !dialog || typeof dialog.showModal !== 'function') return;
 
+  const title = dialog.querySelector('#gallery-title');
   const image = dialog.querySelector('#gallery-image');
   const caption = dialog.querySelector('#gallery-caption');
   const counter = dialog.querySelector('#gallery-count');
   const status = dialog.querySelector('#gallery-status');
   const closeButton = dialog.querySelector('#gallery-close');
+  let photos = links;
   let current = 0;
   let returnFocus = null;
 
@@ -24,13 +26,21 @@
     status.textContent = `Photo ${current + 1} of ${photos.length}. ${caption.textContent}`;
   }
 
-  photos.forEach((link, index) => {
+  links.forEach(link => {
     link.setAttribute('aria-haspopup', 'dialog');
     link.addEventListener('click', event => {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       returnFocus = link;
-      showPhoto(index);
+      const group = link.dataset.galleryGroup || 'memories';
+      const unique = new Set();
+      photos = links.filter(candidate => {
+        if ((candidate.dataset.galleryGroup || 'memories') !== group || unique.has(candidate.href)) return false;
+        unique.add(candidate.href);
+        return true;
+      });
+      title.textContent = link.dataset.galleryTitle || 'Moments with Lola';
+      showPhoto(photos.findIndex(candidate => candidate.href === link.href));
       dialog.showModal();
       document.documentElement.classList.add('gallery-is-open');
       closeButton.focus({ preventScroll: true });
